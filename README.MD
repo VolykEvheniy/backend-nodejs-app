@@ -1,3 +1,31 @@
+# Possible test data that can be used for sending requests:
+
+- Creating new review:
+
+POST - http://localhost:8888/api/reviews
+
+body: {
+  "carId": "865",
+  "text": "Great car!"
+}
+
+- Getting list of reviews that correspond to appropriate car:
+
+GET - http://localhost:8888/api/reviews
+
+body: {
+  "carId": "863",
+  "size": "10",
+  "from": "0"
+}
+
+Counting how many reviews for appropriate car exists:
+
+POST - http://localhost:8888/api/reviews/_counts
+body: {
+    "carsId": ["800", "861", "865", "855","864", "863"]
+}
+
 # nodejs-sample
 This is an example node js project using typescript, consul, express, mongoose, mocha.
 
