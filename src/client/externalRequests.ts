@@ -20,10 +20,5 @@ export const checkCarExists = async (carId: string): Promise<boolean> => {
     }
     return false;
   }
-  //!!! create custom exception (maybe ExternalException) and catch it here
-
-  //const { message, status } = new ExternalError(error);
-  //throw new ExternalError(error)
-  //logger.error('Error in checking if car exists.', error);
 };
 
