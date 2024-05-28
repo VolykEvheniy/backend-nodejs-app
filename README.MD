@@ -19,7 +19,7 @@ body: {
   "from": "0"
 }
 
-# Counting how many reviews for appropriate car exists:
+- Counting how many reviews for appropriate car exists:
 
 POST - http://localhost:8888/api/reviews/_counts
 
