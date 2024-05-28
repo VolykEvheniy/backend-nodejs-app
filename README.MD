@@ -22,6 +22,7 @@ body: {
 Counting how many reviews for appropriate car exists:
 
 POST - http://localhost:8888/api/reviews/_counts
+
 body: {
     "carsId": ["800", "861", "865", "855","864", "863"]
 }
