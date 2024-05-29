@@ -11,13 +11,7 @@ body: {
 
 - Getting list of reviews that correspond to appropriate car:
 
-GET - http://localhost:8888/api/reviews
-
-body: {
-  "carId": "863",
-  "size": "10",
-  "from": "0"
-}
+GET - http://localhost:8888/api/reviews?carId=865&from=0&size=10
 
 - Counting how many reviews for appropriate car exists:
 
