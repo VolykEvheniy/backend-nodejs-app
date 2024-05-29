@@ -4,7 +4,6 @@ import { ReviewSaveDto } from 'src/dto/review/reviewSaveDto';
 import { InternalError } from 'src/system/internalError';
 import { Request, Response } from 'express';
 import {countReviewsByCarsId, createReview as createReviewApi, listReviewsByCarId} from 'src/services/review';
-import {ReviewQueryDto} from "src/dto/review/reviewQueryDto";
 import {ReviewCountRequestDto} from "src/dto/review/reviewCountRequestDto";
 
 
@@ -25,13 +24,24 @@ export const createReview = async (req: Request, res: Response) => {
 
 export const getReviews = async (req: Request, res: Response) => {
   try {
-    const request = new ReviewQueryDto(req.body);
-    const reviews = await listReviewsByCarId(request);
-    res.json(reviews);
+    const { carId, size, from } = req.query;
+
+    if (!carId) {
+      return res.status(400).json({ message: "Car id is required" });
+    }
+
+    const query = {
+      carId: carId as string,
+      size: size ? parseInt(size as string, 10) : 10,
+      from: from ? parseInt(from as string, 10) : 0,
+    };
+
+    const reviews = await listReviewsByCarId(query);
+    return res.json(reviews);
   } catch (err) {
     const { message, status } = new InternalError(err);
     log4js.getLogger().error('Error in retrieving reviews.', err);
-    res.status(status).send({ message });
+    return res.status(status).send({ message });
   }
 };
 

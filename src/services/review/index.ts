@@ -1,10 +1,9 @@
-
 import {ReviewSaveDto} from "src/dto/review/reviewSaveDto";
 import {checkCarExists} from "src/client/externalRequests";
 import Review, {IReview} from "src/model/review";
 import {CarNotFoundError} from "src/system/carNotFoundError";
-import {ReviewQueryDto} from "src/dto/review/reviewQueryDto";
 import {ReviewInfoDto} from "src/dto/review/reviewInfoDto";
+import {ReviewRequestDto} from "src/dto/review/reviewRequestDto";
 
 
 
@@ -32,11 +31,11 @@ export const validateReview = async (reviewDto: ReviewSaveDto) => {
   }
 };
 
-export const listReviewsByCarId = async (query: ReviewQueryDto): Promise<ReviewInfoDto[]> => {
+export const listReviewsByCarId = async (query: ReviewRequestDto): Promise<ReviewInfoDto[]> => {
   const reviews = await Review.find({carId: query.carId})
     .sort({createdAt: -1})
-    .skip(query.skip)
-    .limit(query.limit);
+    .skip(query.from)
+    .limit(query.size);
   return reviews.map(review => toInfoReviewDto(review));
 };
 
